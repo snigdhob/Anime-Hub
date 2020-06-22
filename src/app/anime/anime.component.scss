@@ -1,0 +1,59 @@
+@import 'src/styles.scss';
+.score-circle {
+    background: #44a08d;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #093637, #44a08d);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient( to right, #093637, #44a08d);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-radius: 50%;
+    border: 5px solid lightseagreen;
+    #score {
+        font-size: 25px;
+        #main-score {
+            color: darkred;
+        }
+    }
+    #rank {
+        color: orange;
+    }
+    #popularity {
+        color: coral;
+    }
+    #scored-by {
+        font-size: 12px;
+        #scored-by-num {
+            color: #cfe58a;
+        }
+    }
+}
+
+.field-name {
+    color: lightgray;
+}
+
+.column {
+    height: 100%;
+    .vertical-flex-item {
+        margin-bottom: 5%;
+    }
+    .background {
+        flex-grow: 1;
+        // @extend .vertical-flex-center;
+    }
+    .synopsis {
+        flex-grow: 2;
+    }
+    .related {
+        flex-grow: 1;
+        // @extend .vertical-flex-center;
+    }
+    .information {
+        flex-grow: 2;
+        // @extend .vertical-flex-center;
+    }
+}
+
+app-card {
+    height: 100%;
+}

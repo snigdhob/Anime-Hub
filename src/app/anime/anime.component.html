@@ -1,0 +1,139 @@
+<ng-container *ngIf="animeDetails;else showSpinner">
+    <div class="container mt-5">
+        <h3>{{animeDetails.title}}</h3>
+        <div class="row mt-3">
+            <div class="col-sm-12 col-md-6 col-lg center-horizontal-vertical">
+                <div class="score-circle p-5">
+                    <p id="score" class="mb-0">
+                        Score <b id="main-score">{{animeDetails.score}}</b><br>
+                    </p>
+                    <p id="scored-by" class="text-center mt-0">
+                        (<span id="scored-by-num">{{animeDetails.scored_by}}</span> users)
+                    </p>
+                    <p>Rank <span id="rank">#{{animeDetails.rank}}</span></p>
+                    <p>Popularity <span id="popularity">#{{animeDetails.popularity}}</span></p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg text-center">
+                <img [src]="animeDetails.image_url">
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg center-horizontal-vertical" *ngIf="animeDetails.trailer_url">
+                <iframe [src]="animeDetails.trailer_url | safe">
+                </iframe>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="flex-vertical column">
+                    <div class="vertical-flex-item alternative-titles">
+                        <app-card heading="Alternative Titles">
+                            <ng-container *ngIf="animeDetails.title_english">
+                                <p>
+                                    <span class="field-name">English:</span> &nbsp;{{animeDetails.title_english}}
+                                </p>
+                            </ng-container>
+                            <p>
+                                <span class="field-name">Japanese:</span> &nbsp;{{animeDetails.title_japanese}}
+                            </p>
+                        </app-card>
+                    </div>
+                    <div class="vertical-flex-item information">
+                        <app-card heading="Information">
+                            <p>
+                                <span class="field-name">Type:</span> {{animeDetails.type}}
+                            </p>
+                            <p>
+                                <span class="field-name">Episodes:</span> {{animeDetails.episodes}}
+                            </p>
+                            <p>
+                                <span class="field-name">Status:</span> {{animeDetails.status}}
+                            </p>
+                            <p>
+                                <span class="field-name">Aired:</span> {{animeDetails.aired?.string}}
+                            </p>
+                            <p>
+                                <span class="field-name">Producers:</span> {{producers}}
+                            </p>
+                            <p>
+                                <span class="field-name">Licensors:</span> {{licensors}}
+                            </p>
+                            <p>
+                                <span class="field-name">Studios:</span> {{studios}}
+                            </p>
+                            <p>
+                                <span class="field-name">Source:</span> {{animeDetails.source}}
+                            </p>
+                            <p>
+                                <span class="field-name">Genres:</span> {{genres}}
+                            </p>
+                            <p>
+                                <span class="field-name">Duration:</span> {{animeDetails.duration}}
+                            </p>
+                            <p>
+                                <span class="field-name">Rating:</span> {{animeDetails.rating}}
+                            </p>
+                        </app-card>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-8 col-lg-8">
+                <div class="flex-vertical column">
+                    <div class="vertical-flex-item synopsis">
+                        <app-card heading="Synopsis">
+                            <p>
+                                {{animeDetails.synopsis}}
+                            </p>
+                        </app-card>
+                    </div>
+                    <div class="vertical-flex-item background">
+                        <app-card heading="Background">
+                            <div>
+                                <ng-container *ngIf="animeDetails.background;else noBackgroundDetails">
+                                    {{animeDetails.background}}
+                                </ng-container>
+                            </div>
+                            <ng-template #noBackgroundDetails>
+                                No background information has been added to this title.
+                            </ng-template>
+                        </app-card>
+                    </div>
+                    <div class="vertical-flex-item related">
+                        <app-card heading="Related Anime">
+                            <ng-container *ngIf="!isRelatedEmpty;else noRelatedDetails">
+                                <table class="table table-borderless">
+                                    <ng-container *ngFor="let item of animeDetails.related | keyvalue">
+                                        <tr>
+                                            <td class="field-name">
+                                                {{item.key}}:
+                                            </td>
+                                            <td>
+                                                <ng-container *ngFor="let value of item.value; let i=index">
+                                                    <a href="javascript:void(0);" class="anime-title" *ngIf="value.type === 'anime';else onlyTitle" [routerLink]="['/anime',value.mal_id, value.name, 'y']">
+                                                        {{value.name}}
+                                                    </a>
+                                                    <ng-template #onlyTitle>{{value.name}}</ng-template>
+                                                    <ng-container *ngIf="i != item.value.length - 1">
+                                                        ,&nbsp;
+                                                    </ng-container>
+                                                </ng-container>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </table>
+                            </ng-container>
+                            <ng-template #noRelatedDetails>
+                                No information available.
+                            </ng-template>
+                        </app-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #showSpinner>
+    <app-spinner-component #spinner name="animeSpinner" spinnerClass="center-horizontal-vertical">
+    </app-spinner-component>
+</ng-template>

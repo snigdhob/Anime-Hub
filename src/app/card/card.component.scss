@@ -1,0 +1,21 @@
+.common-card {
+    border: 2px solid whitesmoke;
+    height: 100%;
+}
+
+.common-card:hover {
+    border: 2px solid orange;
+    h4 {
+        border-bottom: 2px solid orange;
+    }
+}
+
+h4 {
+    color: white;
+    background-color: darkslategray;
+    border-bottom: 2px solid whitesmoke;
+}
+
+.body {
+    flex-grow: 1;
+}

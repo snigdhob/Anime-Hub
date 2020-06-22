@@ -1,1 +1,92 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url("https://fonts.googleapis.com/css?family=Audiowide");
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Audiowide, "Helvetica Neue", sans-serif;
+    color: white;
+    background: #000000;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #434343, #000000);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient( to right, #434343, #000000);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.flex-style {
+    display: flex;
+}
+
+.flex-vertical {
+    @extend .flex-style;
+    flex-direction: column;
+}
+
+.vertical-flex-center {
+    @extend .flex-vertical;
+    justify-content: center;
+}
+
+.vertical-flex-space-evenly {
+    @extend .flex-vertical;
+    justify-content: space-evenly;
+}
+
+.horizontal-flex-center {
+    @extend .flex-style;
+    justify-content: center;
+}
+
+.horizontal-flex-end {
+    @extend .flex-style;
+    justify-content: flex-end;
+}
+
+.horizontal-flex-no-wrap {
+    @extend .flex-style;
+    flex-wrap: nowrap;
+}
+
+.ngx-pagination a,
+.ngx-pagination button {
+    color: white !important;
+}
+
+.ngx-pagination .disabled {
+    color: dimgray !important;
+}
+
+.ngx-pagination a:hover,
+.ngx-pagination button:hover {
+    background: blueviolet !important;
+}
+
+.anime-title {
+    color: aqua;
+}
+
+.anime-title:hover {
+    color: #0056b3;
+}
+
+.table {
+    color: white;
+}
+
+.table-header {
+    background-color: darkslategray;
+}
+
+.center-horizontal-vertical {
+    @extend .flex-vertical;
+    /* make main axis vertical */
+    justify-content: center;
+    /* center items vertically, in this case */
+    align-items: center;
+    /* center items horizontally, in this case */
+}
