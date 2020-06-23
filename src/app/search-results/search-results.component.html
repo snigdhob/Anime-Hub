@@ -4,55 +4,64 @@
         <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
     </div>
     <app-spinner-component #spinner name="searchResultsSpinner"></app-spinner-component>
-    <table class="table text-center">
-        <tr class="table-header">
-            <th>Title</th>
-            <th>Type</th>
-            <th>Episodes</th>
-            <th>Score</th>
-        </tr>
-        <ng-container *ngIf="searchResults.length > 0; else noRecords">
-            <tr *ngFor="let item of searchResults 
+    <div class="table-responsive">
+        <table class="table text-center">
+            <tr class="table-header">
+                <th>Title</th>
+                <th>Type</th>
+                <th>Episodes</th>
+                <th>Score</th>
+            </tr>
+            <ng-container *ngIf="searchResults.length > 0; else noRecords">
+                <tr *ngFor="let item of searchResults 
         | paginate: { itemsPerPage: 50, currentPage: pageNumber, totalItems: lastPage * 50,
             autoHide: 'true' }">
-                <td class="text-left">
-                    <div class="row">
-                        <div class="col-2">
-                            <img [src]="item.image_url" height="100" width="90">
-                        </div>
-
-                        <div class="col-10">
-                            <a href="javascript:void(0);" class="anime-title" [routerLink]="['/anime',item.mal_id, item.title, 'n']">
-                             {{ item.title }}
-                        </a>
-                            <br>
-                            <div>
-                                {{ item.synopsis }}
-                                <ng-container *ngIf="item.synopsis.slice(-3)==='...' ">
-                                    <a href="javascript:void(0); " class="anime-title ">read more.</a>
+                    <td class="text-left">
+                        <div class="flex-style">
+                            <div class="mr-3">
+                                <ng-container *ngIf="item.rated != 'Rx';else imageNotAvailable">
+                                    <img [src]="item.image_url" height="100" width="90">
                                 </ng-container>
+                                <ng-template #imageNotAvailable>
+                                    <img src="../../assets/image-not-available.jpg" height="100" width="90">
+                                </ng-template>
+                            </div>
+
+                            <div class="">
+                                <a href="javascript:void(0);" class="anime-title" [routerLink]="['/anime',item.mal_id, item.title, 'n']">
+                                    {{ item.title }}
+                                </a>
+                                <br>
+                                <div>
+                                    {{ item.synopsis }}
+                                    <ng-container *ngIf="item.synopsis.slice(-3)==='...' ">
+                                        <a href="javascript:void(0);" class="anime-title" [routerLink]="['/anime',item.mal_id, item.title, 'n']">
+                                            read more.
+                                        </a>
+                                    </ng-container>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </td>
-                <td>{{ item.type }}</td>
-                <td>{{ item.episodes }}</td>
-                <td>
-                    <ng-container *ngIf="item.score; else NA ">
-                        {{ item.score }}
-                    </ng-container>
-                    <ng-template #NA>N/A</ng-template>
-                </td>
-            </tr>
-        </ng-container>
-        <ng-template #noRecords>
-            <tr>
-                <td colspan="4 ">
-                    No records found
-                </td>
-            </tr>
-        </ng-template>
-    </table>
+                    </td>
+                    <td>{{ item.type }}</td>
+                    <td>{{ item.episodes }}</td>
+                    <td>
+                        <ng-container *ngIf="item.score; else NA ">
+                            {{ item.score }}
+                        </ng-container>
+                        <ng-template #NA>N/A</ng-template>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-template #noRecords>
+                <tr>
+                    <td colspan="4 ">
+                        No records found
+                    </td>
+                </tr>
+            </ng-template>
+        </table>
+    </div>
 
     <div class="horizontal-flex-end " *ngIf="searchResults.length> 0">
         <pagination-controls (pageChange)="pageChanged($event, true)"></pagination-controls>

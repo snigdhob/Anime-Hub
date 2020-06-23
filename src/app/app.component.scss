@@ -1,11 +1,17 @@
 .title {
+    align-items: center;
     h1 {
-        a {
-            color: blueviolet;
-        }
+        color: blueviolet;
     }
     h4 {
         color: indianred;
+    }
+    h1:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+    h1:focus {
+        outline: none;
     }
 }
 
@@ -15,4 +21,5 @@
 
 .letter-section {
     color: aqua;
+    flex-wrap: wrap;
 }

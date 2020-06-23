@@ -17,53 +17,54 @@
     <div class="horizontal-flex-end mt-3">
         <template [ngTemplateOutlet]="prevNextButtons"></template>
     </div>
+    <div class="table-responsive">
+        <table class="table text-center">
+            <tr class="table-header">
+                <th>Rank</th>
+                <th>Title</th>
+                <th>Score</th>
+            </tr>
+            <tr *ngFor="let item of topAnimesResult">
+                <td>{{ item.rank }}</td>
+                <td class="text-left">
+                    <div class="title-cell flex-style">
+                        <div class="mr-3">
+                            <img [src]="item.image_url" height="80" width="50">
+                        </div>
 
-    <table class="table text-center">
-        <tr class="table-header">
-            <th>Rank</th>
-            <th>Title</th>
-            <th>Score</th>
-        </tr>
-        <tr *ngFor="let item of topAnimesResult">
-            <td>{{ item.rank }}</td>
-            <td class="text-left">
-                <div class="row">
-                    <div class="col-auto">
-                        <img [src]="item.image_url" height="80" width="50">
-                    </div>
-
-                    <div class="col-auto">
-                        <a href="javascript:void(0);" class="anime-title" [routerLink]="['/anime',item.mal_id, item.title, 'n']">
+                        <div class="">
+                            <a href="javascript:void(0);" class="anime-title" [routerLink]="['/anime',item.mal_id, item.title, 'n']">
                              {{ item.title }}
                         </a>
-                        <br>
-                        <div class="additional-details">
-                            {{ item.type }}<br>
-                            <ng-container *ngIf="item.type === 'TV'">
-                                (
-                                <ng-container *ngIf="item.episodes; else questionMark">
-                                    {{item.episodes}}
+                            <br>
+                            <div class="additional-details">
+                                {{ item.type }}<br>
+                                <ng-container *ngIf="item.type === 'TV'">
+                                    (
+                                    <ng-container *ngIf="item.episodes; else questionMark">
+                                        {{item.episodes}}
+                                    </ng-container>
+                                    <ng-template #questionMark>?</ng-template>
+                                    &nbsp;episodes)<br>
                                 </ng-container>
-                                <ng-template #questionMark>?</ng-template>
-                                &nbsp;episodes)<br>
-                            </ng-container>
-                            {{item.start_date}}
-                            <ng-container *ngIf="item.type === 'TV'">
-                                &nbsp;-&nbsp;
-                                <ng-container *ngIf="item.end_date; else present">
-                                    {{item.end_date}}
+                                {{item.start_date}}
+                                <ng-container *ngIf="item.type === 'TV'">
+                                    &nbsp;-&nbsp;
+                                    <ng-container *ngIf="item.end_date; else present">
+                                        {{item.end_date}}
+                                    </ng-container>
+                                    <ng-template #present>
+                                        Present
+                                    </ng-template>
                                 </ng-container>
-                                <ng-template #present>
-                                    Present
-                                </ng-template>
-                            </ng-container>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </td>
-            <td>{{ item.score }}</td>
-        </tr>
-    </table>
+                </td>
+                <td>{{ item.score }}</td>
+            </tr>
+        </table>
+    </div>
 
     <div class="horizontal-flex-center">
         <template [ngTemplateOutlet]="prevNextButtons"></template>

@@ -95,7 +95,7 @@ export class AnimeComponent extends BaseComponent implements OnInit {
       for (let i = 0; i < this.animeDetails.studios.length - 1; i++) {
         this.studios += `${this.animeDetails.studios[i].name}, `;
       }
-      this.studios += this.animeDetails.licensors[this.animeDetails.studios.length - 1].name;
+      this.studios += this.animeDetails.studios[this.animeDetails.studios.length - 1].name;
     }
     else {
       this.studios = this.noneFoundMsg;

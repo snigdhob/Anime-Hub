@@ -2,7 +2,7 @@
     <div class="container mt-5">
         <h3>{{animeDetails.title}}</h3>
         <div class="row mt-3">
-            <div class="col-sm-12 col-md-6 col-lg center-horizontal-vertical">
+            <div class="col-sm-12 col-md-12 col-lg mb-4 center-horizontal-vertical">
                 <div class="score-circle p-5">
                     <p id="score" class="mb-0">
                         Score <b id="main-score">{{animeDetails.score}}</b><br>
@@ -10,14 +10,22 @@
                     <p id="scored-by" class="text-center mt-0">
                         (<span id="scored-by-num">{{animeDetails.scored_by}}</span> users)
                     </p>
-                    <p>Rank <span id="rank">#{{animeDetails.rank}}</span></p>
+                    <p>
+                        Rank&nbsp;
+                        <span id="rank">#
+                            <ng-container *ngIf="animeDetails.rank;else noRank">
+                                {{animeDetails.rank}}
+                            </ng-container>
+                            <ng-template #noRank>N/A</ng-template>                            
+                        </span>
+                    </p>
                     <p>Popularity <span id="popularity">#{{animeDetails.popularity}}</span></p>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg text-center">
+            <div class="col-sm-12 col-md col-lg mb-4 text-center" *ngIf="animeDetails.rating != 'Rx - Hentai'">
                 <img [src]="animeDetails.image_url">
             </div>
-            <div class="col-sm-12 col-md-12 col-lg center-horizontal-vertical" *ngIf="animeDetails.trailer_url">
+            <div class="col-sm-12 col-md col-lg center-horizontal-vertical" *ngIf="animeDetails.trailer_url && animeDetails.rating != 'Rx - Hentai'">
                 <iframe [src]="animeDetails.trailer_url | safe">
                 </iframe>
             </div>
@@ -112,7 +120,12 @@
                                                     <a href="javascript:void(0);" class="anime-title" *ngIf="value.type === 'anime';else onlyTitle" [routerLink]="['/anime',value.mal_id, value.name, 'y']">
                                                         {{value.name}}
                                                     </a>
-                                                    <ng-template #onlyTitle>{{value.name}}</ng-template>
+                                                    <ng-template #onlyTitle>
+                                                        {{value.name}}
+                                                        <ng-container *ngIf="value.type">
+                                                            &nbsp;({{value.type}})
+                                                        </ng-container>
+                                                    </ng-template>
                                                     <ng-container *ngIf="i != item.value.length - 1">
                                                         ,&nbsp;
                                                     </ng-container>

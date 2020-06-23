@@ -1,7 +1,9 @@
 <div class="container">
-    <div class="title text-center mt-4">
-        <h1 class="mb-0"><a routerLink="">ANIME HUB</a></h1>
-        <h4 class="mt-0">
+    <div class="flex-vertical title mt-4">
+        <h1 class="mb-0" routerLink="">
+            ANIME HUB
+        </h1>
+        <h4 class="mt-0 text-center">
             <i>A one stop destination for anime lovers!</i>
         </h4>
     </div>
@@ -18,12 +20,14 @@
     </div>
 
     <div class="horizontal-flex-center mt-3">
-        <input type=" text " class="form-control search " placeholder="Search for Animes here " [(ngModel)]="queryString ">
+        <input type=" text " class="form-control search " placeholder="Search for Animes here " [(ngModel)]="queryString" (keydown.enter)="onSearch()" (focusin)="onFocusSearchBox()" (focusout)="onFocusOutSearchBox()" (keyup)="onFocusSearchBox()">
         <button class="btn btn-secondary " name="search " [disabled]="queryString.length < 3 " (click)="onSearch() ">Search</button>
     </div>
-    <!-- <div class="alert alert-warning " role="alert ">
-        <i class="fa fa-info-circle " aria-hidden="true "></i> Search string must be atleast 3 letters long.
-    </div> -->
+    <div class="horizontal-flex-center mt-3" *ngIf="searchWarningShow">
+        <div class="alert alert-warning p-2" role="alert">
+            <i class="fa fa-info-circle" aria-hidden="true "></i> Search string must be atleast 3 letters long.
+        </div>
+    </div>
 </div>
 
 <router-outlet></router-outlet>
