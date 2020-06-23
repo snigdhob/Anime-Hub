@@ -19,8 +19,7 @@ export class TopAnimesComponent extends BaseComponent implements OnInit, AfterVi
 
   constructor(private animeService: JikanService) {
     super();
-    this.category = new FormControl();
-    this.category.setValue('favorite');
+    this.category = new FormControl('favorite');
   }
 
   ngOnInit(): void {
@@ -35,6 +34,7 @@ export class TopAnimesComponent extends BaseComponent implements OnInit, AfterVi
 
   onClickCategory(category: string) {
     if (category !== this.lastSelectedCategory) {
+      this.category.setValue(category);
       this.lastSelectedCategory = category;
       this.selectedPageNumber = 1;
       this.showSpinner('topAnimesSpinner');
