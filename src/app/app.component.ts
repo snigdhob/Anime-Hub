@@ -30,9 +30,12 @@ export class AppComponent extends BaseComponent implements OnInit {
     this.initializeSearchResults();
   }
 
-  onSearch() {
+  onSearch(event: any = undefined) {
     if (this.queryString.value.length >= 3) {
-      let modifiedQueryString = this.queryString.value.split(/\s+/).join('-');
+      let modifiedQueryString = this.queryString.value.split(/\s+/).join('-');      
+      if(event){
+        event.target.blur();
+      }
       this.smartSearchResults = [];
       this.router.navigate(['search', modifiedQueryString]);
     }

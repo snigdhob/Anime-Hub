@@ -23,7 +23,7 @@
         <div class="search-box">
             <mat-form-field appearance="outline">
                 <mat-label>Search for Animes here</mat-label>
-                <input type="text" [formControl]="queryString" (keydown.enter)="onSearch();$event.target.blur()" (focusin)="onFocusSearchBox()" (focusout)="onFocusOutSearchBox()" (keyup)="onFocusSearchBox(true)" matInput [matAutocomplete]="auto">
+                <input type="text" [formControl]="queryString" (keydown.enter)="onSearch($event)" (focusin)="onFocusSearchBox()" (focusout)="onFocusOutSearchBox()" (keyup)="onFocusSearchBox(true)" matInput [matAutocomplete]="auto">
                 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="navigateSmartSearch($event.option.value)">
                     <mat-option *ngIf="queryString.value.length >=3 && !searchDone">
                         Showing top results&nbsp;
