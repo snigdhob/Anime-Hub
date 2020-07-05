@@ -90,3 +90,20 @@ body {
     align-items: center;
     /* center items horizontally, in this case */
 }
+
+mat-label {
+    font-family: Audiowide, "Helvetica Neue", sans-serif !important;
+    color: white !important;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white !important;
+}
+
+.mat-autocomplete-panel {
+    max-height: max-content !important;
+}

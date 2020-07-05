@@ -1,19 +1,20 @@
 <div class="container mt-5">
     <h3>Search Results</h3>
-    <div class="horizontal-flex-end" *ngIf="searchResults.length > 0">
+    <div class="horizontal-flex-end" *ngIf="sortedData.length > 0">
         <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
     </div>
     <app-spinner-component #spinner name="searchResultsSpinner"></app-spinner-component>
+
     <div class="table-responsive">
-        <table class="table text-center">
+        <table class="table text-center" matSort (matSortChange)="sortData($event)">
             <tr class="table-header">
                 <th>Title</th>
-                <th>Type</th>
-                <th>Episodes</th>
-                <th>Score</th>
+                <th mat-sort-header="type">Type</th>
+                <th mat-sort-header="episodes">Episodes</th>
+                <th mat-sort-header="score">Score</th>
             </tr>
-            <ng-container *ngIf="searchResults.length > 0; else noRecords">
-                <tr *ngFor="let item of searchResults 
+            <ng-container *ngIf="sortedData.length > 0; else noRecords">
+                <tr *ngFor="let item of sortedData 
         | paginate: { itemsPerPage: 50, currentPage: pageNumber, totalItems: lastPage * 50,
             autoHide: 'true' }">
                     <td class="text-left">
@@ -34,7 +35,7 @@
                                 <br>
                                 <div>
                                     {{ item.synopsis }}
-                                    <ng-container *ngIf="item.synopsis.slice(-3)==='...' ">
+                                    <ng-container *ngIf="item.synopsis.slice(-3)==='...'">
                                         <a href="javascript:void(0);" class="anime-title" [routerLink]="['/anime',item.mal_id, item.title, 'n']">
                                             read more.
                                         </a>
@@ -46,7 +47,7 @@
                     <td>{{ item.type }}</td>
                     <td>{{ item.episodes }}</td>
                     <td>
-                        <ng-container *ngIf="item.score; else NA ">
+                        <ng-container *ngIf="item.score; else NA">
                             {{ item.score }}
                         </ng-container>
                         <ng-template #NA>N/A</ng-template>
@@ -55,7 +56,7 @@
             </ng-container>
             <ng-template #noRecords>
                 <tr>
-                    <td colspan="4 ">
+                    <td colspan="4">
                         No records found
                     </td>
                 </tr>
@@ -63,7 +64,7 @@
         </table>
     </div>
 
-    <div class="horizontal-flex-end " *ngIf="searchResults.length> 0">
+    <div class="horizontal-flex-end " *ngIf="sortedData.length> 0">
         <pagination-controls (pageChange)="pageChanged($event, true)"></pagination-controls>
     </div>
 </div>

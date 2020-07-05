@@ -9,6 +9,7 @@ export class ProcessIndicatorComponent implements OnInit {
 
   @Input() show : string = 'n';
   @Input() name : string;
+  @Input() isBlack: string = 'n'
 
   constructor() { }
 

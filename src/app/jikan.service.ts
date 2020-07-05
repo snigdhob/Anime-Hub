@@ -20,7 +20,8 @@ export class JikanService {
       );
   }
 
-  search(queryString: string, pageNumber: number): Observable<SearchResult> {
+  search(queryString: string, pageNumber: number, limit: number = undefined,
+    orderBy: string = '', sort: string = ''): Observable<SearchResult> {
     const mainEndpoint = 'search/anime?';
     let q: string;
     if (queryString.length == 1) {
@@ -31,6 +32,15 @@ export class JikanService {
     }
     const pageString = `page=${pageNumber}`;
     let finalUrl: string = `${this.url}${mainEndpoint}${q}&${pageString}`;
+    if (limit) {
+      finalUrl += `&limit=${limit}`;
+    }
+    if(orderBy){
+      finalUrl += `&order_by=${orderBy}`;
+    }
+    if(orderBy){
+      finalUrl += `&sort=${sort}`;
+    }
     return this.http.get<SearchResult>(finalUrl)
       .pipe(
         catchError(this.handleError)

@@ -1,3 +1,3 @@
-<div class="spinner-border text-light spinner-border-sm" role="status" *ngIf="show === 'y'">
+<div class="spinner-border spinner-border-sm" role="status" *ngIf="show === 'y'" [ngClass]="[isBlack === 'y' ? 'text-dark' : 'text-light']">
     <span class="sr-only">Loading...</span>
 </div>

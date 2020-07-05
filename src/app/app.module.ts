@@ -11,13 +11,19 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SpinnerComponentComponent } from './spinner-component/spinner-component.component';
 import { ProcessIndicatorComponent } from './process-indicator/process-indicator.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { AnimeComponent } from './anime/anime.component';
 import { CardComponent } from './card/card.component';
 import { SafePipe } from './safe.pipe';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
-  declarations: [    
+  declarations: [
     AppComponent,
     TopAnimesComponent,
     SpinnerComponentComponent,
@@ -31,11 +37,17 @@ import { SafePipe } from './safe.pipe';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule, 
+    HttpClientModule,
     FormsModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     MatProgressSpinnerModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    MatInputModule,
+    MatIconModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

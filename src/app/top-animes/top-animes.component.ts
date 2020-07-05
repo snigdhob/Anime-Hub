@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { JikanService } from '../jikan.service';
 import { TopEntity } from 'src/model/top-animes';
 import { FormControl } from '@angular/forms';
-import { ProcessIndicatorComponent } from '../process-indicator/process-indicator.component';
 import { BaseComponent } from '../BaseComponent';
 
 @Component({
@@ -10,7 +9,7 @@ import { BaseComponent } from '../BaseComponent';
   templateUrl: './top-animes.component.html',
   styleUrls: ['./top-animes.component.scss']
 })
-export class TopAnimesComponent extends BaseComponent implements OnInit, AfterViewInit {
+export class TopAnimesComponent extends BaseComponent implements OnInit {
 
   category: FormControl;
   topAnimesResult: TopEntity[] = [];
@@ -23,12 +22,6 @@ export class TopAnimesComponent extends BaseComponent implements OnInit, AfterVi
   }
 
   ngOnInit(): void {
-
-  }
-
-  ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
     this.onClickCategory('favorite');
   }
 
