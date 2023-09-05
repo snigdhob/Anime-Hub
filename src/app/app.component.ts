@@ -16,7 +16,7 @@ export class AppComponent extends BaseComponent implements OnInit {
   letterList: string[] = [];
   searchWarningShow: boolean = false;
   smartSearchResults: IAnimeData[] = [];
-  timeoutId: any;
+  timeoutId: ReturnType<typeof setTimeout>;
   searchDone: boolean = false;
 
   constructor(protected router: Router, private animeService: JikanService) {
