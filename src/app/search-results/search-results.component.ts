@@ -1,78 +1,92 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ResultsList } from 'src/model/searchResults';
-import { JikanService } from '../jikan.service';
-import { BaseComponent } from '../BaseComponent';
-import { Sort } from '@angular/material/sort';
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { IAnimeData } from "src/model/searchResults";
+import { JikanService } from "../jikan.service";
+import { BaseComponent } from "../BaseComponent";
+import { Sort } from "@angular/material/sort";
 
 @Component({
-  selector: 'app-search-results',
-  templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.scss']
+  selector: "app-search-results",
+  templateUrl: "./search-results.component.html",
+  styleUrls: ["./search-results.component.scss"],
 })
 export class SearchResultsComponent extends BaseComponent implements OnInit {
-
   actualQueryString: string;
   encodedQueryString: string;
-  searchResults: Array<ResultsList> = [];
+  searchResults: IAnimeData[] = [];
   pageNumber: number = 1;
   lastPage: number = 0;
+  totalResults: number = 0;
   sortMain: Sort;
-  sortedData: ResultsList[] = [];
+  sortedData: IAnimeData[] = [];
+  @ViewChild("searchResultsHeader")
+  searchResultsHeader: ElementRef<HTMLElement>;
 
-  constructor(private route: ActivatedRoute, private animeService: JikanService) {
+  constructor(
+    private route: ActivatedRoute,
+    private animeService: JikanService
+  ) {
     super();
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(routeParams => {
-      this.actualQueryString = routeParams.queryString.replace(/-/g, ' ');
+    this.route.params.subscribe((routeParams) => {
+      this.actualQueryString = routeParams.queryString.replace(/-/g, " ");
       this.encodedQueryString = encodeURIComponent(this.actualQueryString);
-      this.pageNumber = 1;
-      this.getSearchResults();
+      this.getSearchResults("popularity");
     });
   }
 
-  getSearchResults(orderBy: string = '', sort: string = '') {
+  getSearchResults(orderBy: string = "", sort: string = "") {
     this.showSpinner("searchResultsSpinner");
-    this.animeService.search(this.encodedQueryString, this.pageNumber, undefined, orderBy, sort).subscribe(
-      res => {
-        this.sortedData = res.results;
-        if (this.pageNumber === 1) {
-          this.lastPage = res.last_page;
+    this.animeService
+      .search(
+        this.encodedQueryString,
+        this.pageNumber,
+        undefined,
+        orderBy,
+        sort
+      )
+      .subscribe(
+        (res) => {
+          this.sortedData = res.data;
+          if (this.pageNumber === 1) {
+            this.lastPage = res.pagination.last_visible_page;
+            this.totalResults = res.pagination.items.total;
+          }
+          this.hideSpinner("searchResultsSpinner");
+        },
+        (error) => {
+          this.hideSpinner("searchResultsSpinner");
+          console.log(error);
         }
-        this.hideSpinner("searchResultsSpinner");
-      },
-      error => {
-        this.hideSpinner("searchResultsSpinner");
-        console.log(error);
-      })
+      );
   }
 
   pageChanged(currentPage: number, bottom: boolean = false) {
     this.pageNumber = currentPage;
     this.showSpinner("searchResultsSpinner");
-    if (!this.sortMain || !this.sortMain.active || this.sortMain.direction === '') {
+    if (
+      !this.sortMain ||
+      !this.sortMain.active ||
+      this.sortMain.direction === ""
+    ) {
       this.getSearchResults();
-    }
-    else {
+    } else {
       this.getSearchResults(this.sortMain.active, this.sortMain.direction);
     }
     if (bottom) {
-      const element = document.querySelector('h3');
-      element.scrollIntoView();
+      this.searchResultsHeader.nativeElement.scrollIntoView();
     }
   }
 
   sortData(sort: Sort) {
     this.sortMain = sort;
     this.pageNumber = 1;
-    if (!sort.active || sort.direction === '') {
+    if (!sort.active || sort.direction === "") {
       this.getSearchResults();
-    }
-    else {
+    } else {
       this.getSearchResults(sort.active, sort.direction);
     }
   }
-
 }
