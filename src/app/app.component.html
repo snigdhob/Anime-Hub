@@ -32,7 +32,7 @@
                     <ng-container *ngIf="smartSearchResults.length > 0">
                         <mat-option *ngFor="let item of smartSearchResults" [value]="item">
                             <ng-container *ngIf="item.rated != 'Rx';else imageNotAvailable">
-                                <img [src]="item.image_url" height="30" width="30">
+                                <img [src]="item.images.webp.small_image_url" height="30" width="30">
                             </ng-container>
                             <ng-template #imageNotAvailable>
                                 <img src="../../assets/image-not-available.jpg" height="30" width="30">

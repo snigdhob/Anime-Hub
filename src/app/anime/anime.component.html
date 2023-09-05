@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md col-lg mb-4 text-center" *ngIf="animeDetails.rating != 'Rx - Hentai'">
-                <img [src]="animeDetails.image_url">
+                <img [src]="animeDetails.images.webp.image_url">
             </div>
             <div class="col-sm-12 col-md col-lg center-horizontal-vertical" *ngIf="animeDetails.trailer_url && animeDetails.rating != 'Rx - Hentai'">
                 <iframe [src]="animeDetails.trailer_url | safe">
@@ -108,15 +108,15 @@
                     </div>
                     <div class="vertical-flex-item related">
                         <app-card heading="Related Anime">
-                            <ng-container *ngIf="!isRelatedEmpty;else noRelatedDetails">
+                            <ng-container *ngIf="animeDetails.relations.length > 0;else noRelatedDetails">
                                 <table class="table table-borderless">
-                                    <ng-container *ngFor="let item of animeDetails.related | keyvalue">
+                                    <ng-container *ngFor="let item of animeDetails.relations">
                                         <tr>
                                             <td class="field-name">
-                                                {{item.key}}:
+                                                {{item.relation}}:
                                             </td>
                                             <td>
-                                                <ng-container *ngFor="let value of item.value; let i=index">
+                                                <ng-container *ngFor="let value of item.entry; let i=index">
                                                     <a href="javascript:void(0);" class="anime-title" *ngIf="value.type === 'anime';else onlyTitle" [routerLink]="['/anime',value.mal_id, value.name, 'y']">
                                                         {{value.name}}
                                                     </a>
@@ -126,7 +126,7 @@
                                                             &nbsp;({{value.type}})
                                                         </ng-container>
                                                     </ng-template>
-                                                    <ng-container *ngIf="i != item.value.length - 1">
+                                                    <ng-container *ngIf="i != item.entry.length - 1">
                                                         ,&nbsp;
                                                     </ng-container>
                                                 </ng-container>

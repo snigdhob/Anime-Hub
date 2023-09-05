@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JikanService } from './jikan.service';
-import { ResultsList } from 'src/model/searchResults';
+import { IAnimeData } from 'src/model/searchResults';
 import { BaseComponent } from './BaseComponent';
 import { FormControl } from '@angular/forms';
 
@@ -15,7 +15,7 @@ export class AppComponent extends BaseComponent implements OnInit {
   queryString: FormControl;
   letterList: string[] = [];
   searchWarningShow: boolean = false;
-  smartSearchResults: ResultsList[] = [];
+  smartSearchResults: IAnimeData[] = [];
   timeoutId: any;
   searchDone: boolean = false;
 
@@ -72,7 +72,7 @@ export class AppComponent extends BaseComponent implements OnInit {
     this.smartSearchResults = [];
     this.animeService.search(this.queryString.value, 1, 5).subscribe(
       res => {
-        this.smartSearchResults = res.results;
+        this.smartSearchResults = res.data;
         this.searchDone = true;
       },
       error => {

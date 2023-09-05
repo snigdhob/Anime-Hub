@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BaseComponent } from '../BaseComponent';
 import { JikanService } from '../jikan.service';
-import { Anime } from 'src/model/anime';
+import { IData } from 'src/model/anime';
 
 @Component({
   selector: 'app-anime',
@@ -12,14 +12,13 @@ import { Anime } from 'src/model/anime';
 export class AnimeComponent extends BaseComponent implements OnInit {
 
   id: number;
-  animeDetails: Anime;
+  animeDetails: IData;
   noneFoundMsg: string;
   producers: string = '';
   licensors: string = '';
   noGenreMsg: string;
   genres: string = '';
   studios: string = '';
-  isRelatedEmpty: boolean = true;
 
   constructor(private route: ActivatedRoute, private animeService: JikanService) {
     super();
@@ -30,9 +29,7 @@ export class AnimeComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(routeParams => {
       this.id = routeParams.id;
-      // if(routeParams.needsScroll === 'y'){
       window.scroll(0, 0);
-      // }
       this.getAnimeDetails(this.id);
     });
   }
@@ -41,12 +38,11 @@ export class AnimeComponent extends BaseComponent implements OnInit {
     this.showSpinner('animeSpinner');
     this.animeService.getAnime(id).subscribe(
       res => {
-        this.animeDetails = res;
+        this.animeDetails = res.data;
         this.setProducers();
         this.setLicensors();
         this.setGenres();
         this.setStudios();
-        this.existsRelatedObj();
         this.hideSpinner('animeSpinner');
       },
       error => {
@@ -101,10 +97,4 @@ export class AnimeComponent extends BaseComponent implements OnInit {
       this.studios = this.noneFoundMsg;
     }
   }
-
-  existsRelatedObj() {
-    this.isRelatedEmpty = Object.keys(this.animeDetails.related).length === 0
-      && this.animeDetails.related.constructor === Object;
-  }
-
 }

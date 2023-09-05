@@ -7,7 +7,7 @@
     background: linear-gradient( to right, #093637, #44a08d);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     border-radius: 50%;
-    border: 5px solid lightseagreen;
+    border: 5px solid darkgrey;
     #score {
         font-size: 25px;
         #main-score {
@@ -39,18 +39,15 @@
     }
     .background {
         flex-grow: 1;
-        // @extend .vertical-flex-center;
     }
     .synopsis {
         flex-grow: 2;
     }
     .related {
         flex-grow: 1;
-        // @extend .vertical-flex-center;
     }
     .information {
         flex-grow: 2;
-        // @extend .vertical-flex-center;
     }
 }
 

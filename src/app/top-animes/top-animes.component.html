@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div class="text-center">
-        <h3>Top Animes</h3>
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <h3 #topAnimesHeader>Top Animes</h3>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">            
             <label class="btn btn-secondary">
                 <input type="radio" name="category" id="popularity" value="bypopularity" [formControl]="category"
                 (click)="onClickCategory('bypopularity')">Popularity
@@ -25,12 +25,12 @@
                 <th>Title</th>
                 <th>Score</th>
             </tr>
-            <tr *ngFor="let item of topAnimesResult">
-                <td>{{ item.rank }}</td>
+            <tr *ngFor="let item of topAnimesResult; let i = index">
+                <td>{{ item.computedRank }}</td>
                 <td class="text-left">
                     <div class="title-cell flex-style">
                         <div class="mr-3">
-                            <img [src]="item.image_url" height="80" width="50">
+                            <img [src]="item.images.webp.image_url" height="80" width="50">
                         </div>
 
                         <div class="">
@@ -48,16 +48,7 @@
                                     <ng-template #questionMark>?</ng-template>
                                     &nbsp;episodes)<br>
                                 </ng-container>
-                                {{item.start_date}}
-                                <ng-container *ngIf="item.type === 'TV'">
-                                    &nbsp;-&nbsp;
-                                    <ng-container *ngIf="item.end_date; else present">
-                                        {{item.end_date}}
-                                    </ng-container>
-                                    <ng-template #present>
-                                        Present
-                                    </ng-template>
-                                </ng-container>
+                                {{item.aired.string}}                                
                             </div>
                         </div>
                     </div>
@@ -73,12 +64,12 @@
 </div>
 
 <ng-template #prevNextButtons>
-    <button type="button" class="btn btn-warning btn-sm m-2" *ngIf="selectedPageNumber > 1" (click)="onClickButton('prev50')">
-        &lt; Prev 50
+    <button type="button" class="btn btn-warning btn-sm m-2" *ngIf="selectedPageNumber > 1" (click)="onClickButton('prev25')">
+        &lt; Prev 25
         <app-process-indicator #prev name="prev50"></app-process-indicator>
     </button>
-    <button type="button" class="btn btn-warning btn-sm m-2" (click)="onClickButton('next50')">
-        Next 50 &gt;
+    <button type="button" class="btn btn-warning btn-sm m-2" *ngIf="hasNextPage" (click)="onClickButton('next25')">
+        Next 25 &gt;
         <app-process-indicator #next name="next50"></app-process-indicator>
     </button>
 </ng-template>
