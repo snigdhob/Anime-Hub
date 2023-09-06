@@ -9,8 +9,8 @@ import { IAnime } from "../../../model/anime";
   providedIn: "root",
 })
 export class JikanService {
-  private readonly url: string = "https://api.jikan.moe/v4/";
-  constructor(private http: HttpClient) {}
+  private readonly _url: string = "https://api.jikan.moe/v4/";
+  constructor(private _http: HttpClient) {}
 
   getTopAnimes(
     pageNumber: number,
@@ -21,8 +21,8 @@ export class JikanService {
       queryString += `&filter=${category}`;
     }
 
-    return this.http
-      .get<IAnimeListResponse>(`${this.url}top/anime?${queryString}`)
+    return this._http
+      .get<IAnimeListResponse>(`${this._url}top/anime?${queryString}`)
       .pipe(catchError(this.handleError));
   }
 
@@ -41,7 +41,7 @@ export class JikanService {
       q = `q=${queryString}`;
     }
     const pageString = `page=${pageNumber}`;
-    let finalUrl: string = `${this.url}${mainEndpoint}${q}&${pageString}`;
+    let finalUrl: string = `${this._url}${mainEndpoint}${q}&${pageString}`;
     if (limit) {
       finalUrl += `&limit=${limit}`;
     }
@@ -51,14 +51,14 @@ export class JikanService {
     if(sort){
       finalUrl += `&sort=${sort}`
     }
-    return this.http
+    return this._http
       .get<IAnimeListResponse>(finalUrl)
       .pipe(catchError(this.handleError));
   }
 
   getAnime(id: number): Observable<IAnime> {
-    return this.http
-      .get<IAnime>(`${this.url}anime/${id}/full`)
+    return this._http
+      .get<IAnime>(`${this._url}anime/${id}/full`)
       .pipe(catchError(this.handleError));
   }
 
