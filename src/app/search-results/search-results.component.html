@@ -14,7 +14,7 @@
     <table class="table text-center" matSort (matSortChange)="sortData($event)">
       <tr class="table-header">
         <th mat-sort-header="title">Title</th>
-        <th>Type</th>
+        <th mat-sort-header="type">Type</th>
         <th mat-sort-header="episodes">Episodes</th>
         <th mat-sort-header="score">Score</th>
       </tr>
@@ -31,32 +31,40 @@
                   }
           "
         >
-          <td class="text-left">
-            <div class="flex-style">
-              <div class="mr-3">
+          <td
+            class="text-left anime-cell"
+            [appTile]="{
+              url: 'anime',
+              id: item.mal_id,
+              title: item.title
+            }"
+          >
+            <div class="anime-container">
+              <div class="text-center anime-title hide__md">
+                {{ item.title }}
+              </div>
+              <div class="text-center">
                 <ng-container
                   *ngIf="item.rated != 'Rx'; else imageNotAvailable"
                 >
-                  <img
-                    [src]="item.images.webp.image_url"
-                    height="100"
-                    width="90"
-                  />
+                  <img class="anime-img" [src]="item.images.webp.image_url" />
                 </ng-container>
                 <ng-template #imageNotAvailable>
                   <img
+                    class="anime-img"
                     src="../../assets/image-not-available.jpg"
-                    height="100"
-                    width="90"
                   />
                 </ng-template>
               </div>
-
-              <div class="anime-container">
+              <div class="text-center hide__md">
+                <span class="mr-3">{{ item.type }}({{ item.episodes }})</span>
+                <span><i class="fa fa-star"></i>{{ item.score || "NA" }}</span>
+              </div>
+              <div>
                 <a
                   href="javascript:void(0);"
-                  class="anime-title"
-                  [routerLink]="['/anime', item.mal_id, item.title, 'n']"
+                  class="anime-title hide__sm"
+                  [routerLink]="['/anime', item.mal_id, item.title]"
                 >
                   {{ item.title }}
                 </a>
@@ -67,8 +75,8 @@
                     {{ item.synopsis.slice(0, 250) }}...
                     <a
                       href="javascript:void(0);"
-                      class="anime-title"
-                      [routerLink]="['/anime', item.mal_id, item.title, 'n']"
+                      class="anime-title read-more"
+                      [routerLink]="['/anime', item.mal_id, item.title ]"
                     >
                       read more.
                     </a>
@@ -78,9 +86,9 @@
               </div>
             </div>
           </td>
-          <td>{{ item.type }}</td>
-          <td>{{ item.episodes }}</td>
-          <td>{{ item.score || "NA" }}</td>
+          <td class="hide__sm">{{ item.type }}</td>
+          <td class="hide__sm">{{ item.episodes }}</td>
+          <td class="hide__sm">{{ item.score || "NA" }}</td>
         </tr>
       </ng-container>
       <ng-template #noRecords>

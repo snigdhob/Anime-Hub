@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'home', component: TopAnimesComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'search/:queryString', component: SearchResultsComponent },
-  { path: 'anime/:id/:name/:needsScroll', component: AnimeComponent}
+  { path: 'anime/:id/:name', component: AnimeComponent}
 ];
 
 @NgModule({

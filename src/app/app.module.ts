@@ -21,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import {MatSortModule} from '@angular/material/sort';
 import { SafePipe } from './common/pipes/safe.pipe';
+import { TileDirective } from './common/directives/tile.directive';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SafePipe } from './common/pipes/safe.pipe';
     AnimeComponent,
     CardComponent,
     SafePipe,
+    TileDirective,
   ],
   imports: [
     BrowserModule,

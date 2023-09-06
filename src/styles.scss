@@ -105,7 +105,10 @@ mat-form-field {
 }
 
 .mat-sort-header-container{
-    justify-content: center;
+    justify-content: start;
+    @media screen and (min-width: 768px){
+        justify-content: center;
+    }
 }
 
 .mat-form-field-appearance-outline .mat-form-field-outline {

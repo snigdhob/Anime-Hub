@@ -1,68 +1,105 @@
 <div class="container">
-    <div class="flex-vertical title mt-4">
-        <h1 class="mb-0" routerLink="">
-            ANIME HUB
-        </h1>
-        <h4 class="mt-0 text-center">
-            <i>A one stop destination for anime lovers!</i>
-        </h4>
-    </div>
+  <div class="flex-vertical title mt-4">
+    <h1 class="mb-0" routerLink="">ANIME HUB</h1>
+    <h4 class="mt-0 text-center">
+      <i>A one stop destination for anime lovers!</i>
+    </h4>
+  </div>
 
-    <div class="horizontal-flex-center letter-section mt-5">
-        <div class="m-1">
-            <a href="javascript:void(0);" (click)="navigateFromLetterClick('.')" class="anime-title">#</a>
-        </div>
-        <div *ngFor="let item of letterList" class="m-1">
-            <a href="javascript:void(0);" (click)="navigateFromLetterClick(item)" class="anime-title">
-                {{ item }}
-            </a>
-        </div>
+  <div class="horizontal-flex-center letter-section mt-5">
+    <div class="m-1">
+      <a
+        href="javascript:void(0);"
+        (click)="navigateFromLetterClick('.')"
+        class="anime-title"
+        >#</a
+      >
     </div>
+    <div *ngFor="let item of letterList" class="m-1">
+      <a
+        href="javascript:void(0);"
+        (click)="navigateFromLetterClick(item)"
+        class="anime-title"
+      >
+        {{ item }}
+      </a>
+    </div>
+  </div>
 
-    <div class="horizontal-flex-center mt-3">
-        <div class="search-box">
-            <mat-form-field appearance="outline">
-                <mat-label>Search for Animes here</mat-label>
-                <input type="text" [formControl]="queryString" (keydown.enter)="onSearch($event)" (focusin)="onFocusSearchBox()" (focusout)="onFocusOutSearchBox()" (keyup)="onFocusSearchBox(true)" matInput [matAutocomplete]="auto">
-                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="navigateSmartSearch($event.option.value)">
-                    <mat-option *ngIf="queryString.value.length >=3 && !searchDone">
-                        Showing top results&nbsp;
-                        <app-process-indicator #prev name="smartSearchInd" isBlack="y" show='y'></app-process-indicator>
-                    </mat-option>
-                    <ng-container *ngIf="smartSearchResults.length > 0">
-                        <mat-option *ngFor="let item of smartSearchResults" [value]="item">
-                            <ng-container *ngIf="item.rated != 'Rx';else imageNotAvailable">
-                                <img [src]="item.images.webp.small_image_url" height="30" width="30">
-                            </ng-container>
-                            <ng-template #imageNotAvailable>
-                                <img src="../../assets/image-not-available.jpg" height="30" width="30">
-                            </ng-template>
-                            &nbsp;
-                            <span class="smart-search-title">{{ item.title }}</span>
-                        </mat-option>
-                        <mat-option [value]="queryString.value">
-                            <div id="all-results">View all results for <i>{{queryString.value}}</i></div>
-                        </mat-option>
-                    </ng-container>
-                    <!-- <ng-template #noResults>
-                        <ng-container *ngIf="queryString.length >=3 && searchDone">
-                            <mat-option disabled>Oops! No results found.</mat-option>
-                        </ng-container>
-                    </ng-template> -->
-                </mat-autocomplete>
-            </mat-form-field>
-        </div>
+  <div class="horizontal-flex-center mt-3">
+    <div class="search-box">
+      <mat-form-field appearance="outline">
+        <mat-label>Search for Animes here</mat-label>
+        <input
+          type="text"
+          [formControl]="queryString"
+          (keydown.enter)="onSearch($event)"
+          (focusin)="onFocusSearchBox()"
+          (focusout)="onFocusOutSearchBox()"
+          (keyup)="onFocusSearchBox()"
+          matInput
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="navigateSmartSearch($event.option.value)"
+        >
+          <mat-option *ngIf="queryString.value.length >= 3 && !searchDone">
+            Showing top results&nbsp;
+            <app-process-indicator
+              #prev
+              name="smartSearchInd"
+              isBlack="y"
+              show="y"
+            ></app-process-indicator>
+          </mat-option>
+          <ng-container *ngIf="smartSearchResults.length > 0">
+            <mat-option *ngFor="let item of smartSearchResults" [value]="item">
+              <ng-container *ngIf="item.rated != 'Rx'; else imageNotAvailable">
+                <img
+                  [src]="item.images.webp.small_image_url"
+                  height="30"
+                  width="30"
+                />
+              </ng-container>
+              <ng-template #imageNotAvailable>
+                <img
+                  src="../../assets/image-not-available.jpg"
+                  height="30"
+                  width="30"
+                />
+              </ng-template>
+              &nbsp;
+              <span class="smart-search-title">{{ item.title }}</span>
+            </mat-option>
+            <mat-option [value]="queryString.value">
+              <div id="all-results">
+                View all results for <i>{{ queryString.value }}</i>
+              </div>
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+      </mat-form-field>
     </div>
-    <div class="horizontal-flex-center" *ngIf="searchWarningShow">
-        <div class="alert alert-warning p-2" role="alert">
-            <i class="fa fa-info-circle" aria-hidden="true"></i> Search string must be atleast 3 letters long.
-        </div>
+  </div>
+  <div class="horizontal-flex-center" *ngIf="searchWarningShow">
+    <div class="alert alert-warning p-2" role="alert">
+      <i class="fa fa-info-circle" aria-hidden="true"></i> Search string must be
+      atleast 3 letters long.
     </div>
-    <div class="horizontal-flex-center">
-        <div class="search-button">
-            <button class="btn btn-secondary btn-lg mt-2" name="search" [disabled]="queryString.value.length < 3" (click)="onSearch()">Search</button>
-        </div>
+  </div>
+  <div class="horizontal-flex-center">
+    <div class="search-button">
+      <button
+        class="btn btn-secondary btn-lg mt-2"
+        name="search"
+        [disabled]="queryString.value.length < 3"
+        (click)="onSearch()"
+      >
+        Search
+      </button>
     </div>
+  </div>
 </div>
 
 <router-outlet></router-outlet>
