@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <h3 #searchResultsHeader>Search Results</h3>
+  <h3 class="mb-4" #searchResultsHeader>Search Results</h3>
   <div class="horizontal-flex-end" *ngIf="sortedData.length > 0">
     <pagination-controls
       (pageChange)="pageChanged($event)"
@@ -13,8 +13,8 @@
   <div class="table-responsive">
     <table class="table text-center" matSort (matSortChange)="sortData($event)">
       <tr class="table-header">
-        <th>Title</th>
-        <th mat-sort-header="type">Type</th>
+        <th mat-sort-header="title">Title</th>
+        <th>Type</th>
         <th mat-sort-header="episodes">Episodes</th>
         <th mat-sort-header="score">Score</th>
       </tr>
@@ -52,7 +52,7 @@
                 </ng-template>
               </div>
 
-              <div class="">
+              <div class="anime-container">
                 <a
                   href="javascript:void(0);"
                   class="anime-title"
@@ -60,7 +60,6 @@
                 >
                   {{ item.title }}
                 </a>
-                <br />
                 <div>
                   <ng-container
                     *ngIf="item.synopsis?.length > 200; else fullSynopsis"
@@ -81,12 +80,7 @@
           </td>
           <td>{{ item.type }}</td>
           <td>{{ item.episodes }}</td>
-          <td>
-            <ng-container *ngIf="item.score; else NA">
-              {{ item.score }}
-            </ng-container>
-            <ng-template #NA>N/A</ng-template>
-          </td>
+          <td>{{ item.score || "NA" }}</td>
         </tr>
       </ng-container>
       <ng-template #noRecords>

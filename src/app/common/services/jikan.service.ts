@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { IAnimeListResponse } from "../model/searchResults";
-import { IAnime } from "../model/anime";
+import { IAnimeListResponse } from "../../../model/searchResults";
+import { IAnime } from "../../../model/anime";
 
 @Injectable({
   providedIn: "root",

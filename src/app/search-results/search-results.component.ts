@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { IAnimeData } from "src/model/searchResults";
-import { JikanService } from "../jikan.service";
-import { BaseComponent } from "../BaseComponent";
+import { JikanService } from "../common/services/jikan.service";
+import { BaseComponent } from "../common/BaseComponent";
 import { Sort } from "@angular/material/sort";
 
 @Component({
@@ -84,7 +84,7 @@ export class SearchResultsComponent extends BaseComponent implements OnInit {
     this.sortMain = sort;
     this.pageNumber = 1;
     if (!sort.active || sort.direction === "") {
-      this.getSearchResults();
+      this.getSearchResults("popularity");
     } else {
       this.getSearchResults(sort.active, sort.direction);
     }

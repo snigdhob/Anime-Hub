@@ -1,75 +1,107 @@
 <div class="container mt-5">
-    <div class="text-center">
-        <h3 #topAnimesHeader>Top Animes</h3>
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">            
-            <label class="btn btn-secondary">
-                <input type="radio" name="category" id="popularity" value="bypopularity" [formControl]="category"
-                (click)="onClickCategory('bypopularity')">Popularity
-            </label>
-            <label class="btn btn-secondary active">
-                <input type="radio" name="category" id="favorite" value="favorite" [formControl]="category"
-                (click)="onClickCategory('favorite')">Favorites
-            </label>
-        </div>
+  <div class="text-center">
+    <h3 #topAnimesHeader>Top Animes</h3>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-secondary">
+        <input
+          type="radio"
+          name="category"
+          id="popularity"
+          value="bypopularity"
+          [formControl]="category"
+          (click)="onClickCategory('bypopularity')"
+        />Popularity
+      </label>
+      <label class="btn btn-secondary active">
+        <input
+          type="radio"
+          name="category"
+          id="favorite"
+          value="favorite"
+          [formControl]="category"
+          (click)="onClickCategory('favorite')"
+        />Favorites
+      </label>
     </div>
-    <app-spinner-component #spinner name="topAnimesSpinner"></app-spinner-component>
+  </div>
+  <app-spinner-component
+    #spinner
+    name="topAnimesSpinner"
+  ></app-spinner-component>
 
-    <div class="horizontal-flex-end mt-3">
-        <template [ngTemplateOutlet]="prevNextButtons"></template>
-    </div>
+  <div class="horizontal-flex-end mt-4">
+    <template [ngTemplateOutlet]="prevNextButtons"></template>
+  </div>
 
-    <div class="table-responsive">
-        <table class="table text-center">
-            <tr class="table-header">
-                <th>Rank</th>
-                <th>Title</th>
-                <th>Score</th>
-            </tr>
-            <tr *ngFor="let item of topAnimesResult; let i = index">
-                <td>{{ item.computedRank }}</td>
-                <td class="text-left">
-                    <div class="title-cell flex-style">
-                        <div class="mr-3">
-                            <img [src]="item.images.webp.image_url" height="80" width="50">
-                        </div>
+  <div>
+    <table class="table text-center">
+      <tr class="table-header hide__sm">
+        <th>Rank</th>
+        <th>Title</th>
+        <th>Score</th>
+      </tr>
+      <tr *ngFor="let item of topAnimesResult; let i = index">
+        <td>{{ item.computedRank }}</td>
+        <td class="text-left">
+          <div class="title-cell flex-style">
+            <div class="mr-3">
+              <img [src]="item.images.webp.image_url" height="80" width="50" />
+            </div>
 
-                        <div class="">
-                            <a href="javascript:void(0);" class="anime-title" [routerLink]="['/anime',item.mal_id, item.title, 'n']">
-                             {{ item.title }}
-                        </a>
-                            <br>
-                            <div class="additional-details">
-                                {{ item.type }}<br>
-                                <ng-container *ngIf="item.type === 'TV'">
-                                    (
-                                    <ng-container *ngIf="item.episodes; else questionMark">
-                                        {{item.episodes}}
-                                    </ng-container>
-                                    <ng-template #questionMark>?</ng-template>
-                                    &nbsp;episodes)<br>
-                                </ng-container>
-                                {{item.aired.string}}                                
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>{{ item.score }}</td>
-            </tr>
-        </table>
-    </div>
+            <div class="anime-container">
+              <a
+                href="javascript:void(0);"
+                class="anime-title"
+                [routerLink]="['/anime', item.mal_id, item.title, 'n']"
+              >
+                {{ item.title }}
+              </a>
+              <div class="additional-details">
+                {{ item.type }}<br />
+                <ng-container *ngIf="item.type === 'TV'">
+                  (
+                  <ng-container *ngIf="item.episodes; else questionMark">
+                    {{ item.episodes }}
+                  </ng-container>
+                  <ng-template #questionMark>?</ng-template>
+                  &nbsp;episodes)<br />
+                </ng-container>
+                {{ item.aired.string }}
+              </div>
+              <div class="hide__md">
+                <span class="field-name">Score: </span>
+                {{ item.score }}
+            </div>
+            </div>
+          </div>
+        </td>
+        <td class="hide__sm">{{ item.score }}</td>
+      </tr>
+    </table>
+  </div>
 
-    <div class="horizontal-flex-center">
-        <template [ngTemplateOutlet]="prevNextButtons"></template>
-    </div>
+  <div class="horizontal-flex-center">
+    <template [ngTemplateOutlet]="prevNextButtons"></template>
+  </div>
 </div>
 
 <ng-template #prevNextButtons>
-    <button type="button" class="btn btn-warning btn-sm m-2" *ngIf="selectedPageNumber > 1" (click)="onClickButton('prev25')">
-        &lt; Prev 25
-        <app-process-indicator #prev name="prev50"></app-process-indicator>
-    </button>
-    <button type="button" class="btn btn-warning btn-sm m-2" *ngIf="hasNextPage" (click)="onClickButton('next25')">
-        Next 25 &gt;
-        <app-process-indicator #next name="next50"></app-process-indicator>
-    </button>
+  <button
+    type="button"
+    class="btn btn-warning btn-sm m-2"
+    *ngIf="selectedPageNumber > 1"
+    (click)="onClickButton('prev25')"
+  >
+    &lt; Prev 25
+    <app-process-indicator #prev name="prev50"></app-process-indicator>
+  </button>
+  <button
+    type="button"
+    class="btn btn-warning btn-sm m-2"
+    *ngIf="hasNextPage"
+    (click)="onClickButton('next25')"
+  >
+    Next 25 &gt;
+    <app-process-indicator #next name="next50"></app-process-indicator>
+  </button>
 </ng-template>
