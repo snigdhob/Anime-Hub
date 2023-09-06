@@ -6,7 +6,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ng deploy --base-href=/Anime-Hub/"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +27,6 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
     "ngx-pagination": "^5.0.0",
-    "ngx-smart-modal": "^7.4.1",
     "path": "^0.12.7",
     "rxjs": "~6.5.5",
     "tslib": "^1.10.0",
