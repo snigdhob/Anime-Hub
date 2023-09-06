@@ -47,10 +47,11 @@ export class AnimeComponent extends BaseComponent implements OnInit {
       },
       error => {
         console.log(error);
-      })
+      });
   }
 
   setProducers() {
+    this.producers = '';
     if (this.animeDetails.producers.length > 0) {
       for (let i = 0; i < this.animeDetails.producers.length - 1; i++) {
         this.producers += `${this.animeDetails.producers[i].name}, `;
@@ -63,6 +64,7 @@ export class AnimeComponent extends BaseComponent implements OnInit {
   }
 
   setLicensors() {
+    this.licensors = '';
     if (this.animeDetails.licensors.length > 0) {
       for (let i = 0; i < this.animeDetails.licensors.length - 1; i++) {
         this.licensors += `${this.animeDetails.licensors[i].name}, `;
@@ -75,6 +77,7 @@ export class AnimeComponent extends BaseComponent implements OnInit {
   }
 
   setGenres() {
+    this.genres = '';
     if (this.animeDetails.genres.length > 0) {
       for (let i = 0; i < this.animeDetails.genres.length - 1; i++) {
         this.genres += `${this.animeDetails.genres[i].name}, `;
@@ -87,6 +90,7 @@ export class AnimeComponent extends BaseComponent implements OnInit {
   }
 
   setStudios() {
+    this.studios = '';
     if (this.animeDetails.studios.length > 0) {
       for (let i = 0; i < this.animeDetails.studios.length - 1; i++) {
         this.studios += `${this.animeDetails.studios[i].name}, `;
