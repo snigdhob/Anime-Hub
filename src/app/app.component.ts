@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JikanService } from './common/services/jikan.service';
 import { IAnimeData } from 'src/model/searchResults';
-import { BaseComponent } from './BaseComponent';
+import { BaseComponent } from './common/BaseComponent';
 import { FormControl } from '@angular/forms';
 
 @Component({

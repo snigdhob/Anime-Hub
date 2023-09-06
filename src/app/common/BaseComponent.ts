@@ -1,6 +1,6 @@
 import { ViewChildren, QueryList } from '@angular/core';
-import { ProcessIndicatorComponent } from './process-indicator/process-indicator.component';
-import { SpinnerComponentComponent } from './spinner-component/spinner-component.component';
+import { ProcessIndicatorComponent } from '../process-indicator/process-indicator.component';
+import { SpinnerComponentComponent } from '../spinner-component/spinner-component.component';
 
 export abstract class BaseComponent {
 

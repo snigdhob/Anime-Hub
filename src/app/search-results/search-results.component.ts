@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { IAnimeData } from "src/model/searchResults";
 import { JikanService } from "../common/services/jikan.service";
-import { BaseComponent } from "../BaseComponent";
+import { BaseComponent } from "../common/BaseComponent";
 import { Sort } from "@angular/material/sort";
 
 @Component({

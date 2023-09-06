@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BaseComponent } from '../BaseComponent';
+import { BaseComponent } from '../common/BaseComponent';
 import { JikanService } from '../common/services/jikan.service';
 import { IData } from 'src/model/anime';
 
