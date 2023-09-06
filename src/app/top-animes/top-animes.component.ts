@@ -1,24 +1,26 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { JikanService } from "../common/services/jikan.service";
 import { IAnimeData } from "src/model/searchResults";
 import { FormControl } from "@angular/forms";
 import { BaseComponent } from "../common/BaseComponent";
-import { map, mergeMap, tap } from "rxjs/operators";
+import { map, mergeMap, takeUntil, tap } from "rxjs/operators";
+import { Subject } from "rxjs";
 
 @Component({
   selector: "app-top-animes",
   templateUrl: "./top-animes.component.html",
   styleUrls: ["./top-animes.component.scss"],
 })
-export class TopAnimesComponent extends BaseComponent implements OnInit {
+export class TopAnimesComponent extends BaseComponent implements OnInit, OnDestroy {
   category: FormControl;
   topAnimesResult: IAnimeData[] = [];
   lastSelectedCategory: string = "";
   selectedPageNumber: number = 1;
   hasNextPage = true;
   @ViewChild("topAnimesHeader") topAnimesHeader: ElementRef<HTMLElement>;
+  notifier = new Subject();
 
-  constructor(private animeService: JikanService) {
+  constructor(private _animeService: JikanService) {
     super();
   }
 
@@ -53,7 +55,7 @@ export class TopAnimesComponent extends BaseComponent implements OnInit {
     pageNumber: number = 1,
     buttonPressed = undefined
   ) {
-    this.animeService
+    this._animeService
       .getTopAnimes(pageNumber, category)
       .pipe(
         tap((res) => (this.hasNextPage = res.pagination.has_next_page)),
@@ -63,7 +65,8 @@ export class TopAnimesComponent extends BaseComponent implements OnInit {
             item.computedRank = i + 1 + 25 * (this.selectedPageNumber - 1);
             return item;
           })
-        )
+        ),
+        takeUntil(this.notifier)
       )
       .subscribe(
         (res) => {
@@ -83,5 +86,10 @@ export class TopAnimesComponent extends BaseComponent implements OnInit {
     } else {
       this.hideProcessInd(buttonPressed);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.notifier.next();
+    this.notifier.complete();
   }
 }

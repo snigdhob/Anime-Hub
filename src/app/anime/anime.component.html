@@ -1,6 +1,6 @@
 <ng-container *ngIf="animeDetails; else showSpinner">
   <div class="container mt-5">
-    <h3>{{ animeDetails.title }}</h3>
+    <h3 class="text-center">{{ animeDetails.title }}</h3>
     <div class="row mt-3">
       <div class="col-sm-12 col-md-12 col-lg mb-4 center-horizontal-vertical">
         <div class="score-circle p-5">
@@ -137,12 +137,7 @@
                             href="javascript:void(0);"
                             class="anime-title"
                             *ngIf="value.type === 'anime'; else onlyTitle"
-                            [routerLink]="[
-                              '/anime',
-                              value.mal_id,
-                              value.name,
-                              'y'
-                            ]"
+                            [routerLink]="['/anime', value.mal_id, value.name]"
                           >
                             {{ value.name }}
                           </a>

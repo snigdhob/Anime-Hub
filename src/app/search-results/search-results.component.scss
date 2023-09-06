@@ -1,7 +1,42 @@
-.container{
-    .anime-container{
-        display: flex;
-        flex-direction: column;
-        gap: 12px 0;
+.container {
+  .table-responsive {
+    .table {
+      .table-header {
+        th {
+          display: block;
+          text-align: left;
+          @media screen and (min-width: 768px) {
+            display: table-cell;
+            text-align: center;
+          }
+        }
+      }
+
+      .anime-cell {
+        transition: all 1s ease;
+        .anime-container {
+          display: flex;
+          flex-direction: column;
+          gap: 12px 0;
+          img.anime-img {
+            width: 120px;
+            height: auto;
+            @media screen and (min-width: 768px) {
+              width: 100px;
+            }
+          }
+          .read-more {
+            pointer-events: none;
+            @media screen and (min-width: 768px) {
+              pointer-events: all;
+            }
+          }
+          @media screen and (min-width: 768px) {
+            flex-direction: row;
+            gap: 0 12px;
+          }
+        }
+      }
     }
+  }
 }
