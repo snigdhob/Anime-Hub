@@ -52,6 +52,10 @@ body {
     flex-wrap: nowrap;
 }
 
+ul.ngx-pagination{
+    padding-inline-start: 0;
+}
+
 .ngx-pagination a,
 .ngx-pagination button {
     color: white !important;
@@ -100,10 +104,46 @@ mat-form-field {
     width: 100%;
 }
 
+.mat-sort-header-container{
+    justify-content: center;
+}
+
 .mat-form-field-appearance-outline .mat-form-field-outline {
     color: white !important;
 }
 
 .mat-autocomplete-panel {
     max-height: max-content !important;
+}
+
+.hide__sm{
+    display: none;
+    @media screen and (min-width: 768px){
+        display: block;
+    }
+}
+
+tr.hide__sm{
+    display: none;
+    @media screen and (min-width: 768px){
+        display: table-row;
+    }
+}
+
+td.hide__sm{
+    display: none;
+    @media screen and (min-width: 768px){
+        display: table-cell;
+    }
+}
+
+.hide__md{
+    display: block;
+    @media screen and (min-width: 768px){
+        display: none;
+    }
+}
+
+.field-name{
+    color:lightsteelblue;
 }

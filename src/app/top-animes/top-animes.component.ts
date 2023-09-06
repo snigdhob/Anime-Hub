@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { JikanService } from "../jikan.service";
+import { JikanService } from "../common/services/jikan.service";
 import { IAnimeData } from "src/model/searchResults";
 import { FormControl } from "@angular/forms";
 import { BaseComponent } from "../BaseComponent";

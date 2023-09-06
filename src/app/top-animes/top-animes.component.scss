@@ -7,4 +7,9 @@ label.btn.btn-secondary.active {
     .additional-details {
         font-size: 12px;
     }
+    .anime-container{
+        display: flex;
+        flex-direction: column;
+        gap: 8px 0;
+    }
 }

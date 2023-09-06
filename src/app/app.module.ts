@@ -14,13 +14,13 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AnimeComponent } from './anime/anime.component';
 import { CardComponent } from './card/card.component';
-import { SafePipe } from './safe.pipe';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import {MatSortModule} from '@angular/material/sort';
+import { SafePipe } from './common/pipes/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import {MatSortModule} from '@angular/material/sort';
     SearchResultsComponent,
     AnimeComponent,
     CardComponent,
-    SafePipe
+    SafePipe,
   ],
   imports: [
     BrowserModule,

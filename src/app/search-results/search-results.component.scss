@@ -1,6 +1,7 @@
-// th:first-child,
-// td:first-child {
-//     position: sticky;
-//     left: 0;
-//     z-index: 11;
-// }
+.container{
+    .anime-container{
+        display: flex;
+        flex-direction: column;
+        gap: 12px 0;
+    }
+}
