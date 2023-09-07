@@ -4,7 +4,7 @@ import {
   HostListener,
   Input,
   Renderer2,
-  OnDestroy
+  OnDestroy,
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subject, fromEvent } from "rxjs";
@@ -30,7 +30,7 @@ export class TileDirective implements OnDestroy {
       this.isMobile = this.checkIsMobile(w.outerWidth);
     });
     this.checkIsMobile(window.outerWidth);
-  }  
+  }
 
   @HostListener("click") onMouseEnter() {
     if (this.isMobile) {
@@ -39,7 +39,13 @@ export class TileDirective implements OnDestroy {
         "background-color",
         "dimgrey"
       );
-      this._router.navigate([this.appTile.url, this.appTile.id, this.appTile.title]);
+      setTimeout(() => {
+        this._router.navigate([
+          this.appTile.url,
+          this.appTile.id,
+          this.appTile.title,
+        ]);
+      }, 60);
     }
   }
 
