@@ -1,15 +1,21 @@
 label.btn.btn-secondary.active {
-    background-color: green;
-    border: 1px solid aliceblue;
+  background-color: green;
+  border: 1px solid aliceblue;
 }
 
 .title-cell {
-    .additional-details {
-        font-size: 12px;
+  .additional-details {
+    font-size: 12px;
+  }
+  .anime-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px 0;
+    .anime-cell {
+      pointer-events: none;
+      @media screen and (min-width: 768px) {
+        pointer-events: all;
+      }
     }
-    .anime-container{
-        display: flex;
-        flex-direction: column;
-        gap: 8px 0;
-    }
+  }
 }

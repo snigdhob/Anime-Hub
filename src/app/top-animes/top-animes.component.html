@@ -42,7 +42,14 @@
       </tr>
       <tr *ngFor="let item of topAnimesResult; let i = index">
         <td>{{ item.computedRank }}</td>
-        <td class="text-left">
+        <td
+          class="text-left"
+          [appTile]="{
+            url: 'anime',
+            id: item.mal_id,
+            title: item.title
+          }"
+        >
           <div class="title-cell flex-style">
             <div class="mr-3">
               <img [src]="item.images.webp.image_url" height="80" width="50" />
@@ -71,7 +78,7 @@
               <div class="hide__md">
                 <span class="field-name">Score: </span>
                 {{ item.score }}
-            </div>
+              </div>
             </div>
           </div>
         </td>
