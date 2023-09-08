@@ -102,22 +102,15 @@
           <div class="vertical-flex-item synopsis">
             <app-card heading="Synopsis">
               <p>
-                {{ animeDetails.synopsis }}
+                {{ animeDetails.synopsis || informationErrorMsg }}
               </p>
             </app-card>
           </div>
           <div class="vertical-flex-item background">
             <app-card heading="Background">
               <div>
-                <ng-container
-                  *ngIf="animeDetails.background; else noBackgroundDetails"
-                >
-                  {{ animeDetails.background }}
-                </ng-container>
+                {{ animeDetails.background || backgroundErrorMsg }}
               </div>
-              <ng-template #noBackgroundDetails>
-                No background information has been added to this title.
-              </ng-template>
             </app-card>
           </div>
           <div class="vertical-flex-item related">
@@ -128,8 +121,8 @@
                 <table class="table table-borderless">
                   <ng-container *ngFor="let item of animeDetails.relations">
                     <tr>
-                      <td class="field-name">{{ item.relation }}:</td>
-                      <td>
+                      <td class="field-name relation-type">{{ item.relation }}:</td>
+                      <td width="100%">
                         <ng-container
                           *ngFor="let value of item.entry; let i = index"
                         >
@@ -157,7 +150,7 @@
                 </table>
               </ng-container>
               <ng-template #noRelatedDetails>
-                No information available.
+                {{ informationErrorMsg }}.
               </ng-template>
             </app-card>
           </div>
