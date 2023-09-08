@@ -14,21 +14,21 @@ import { takeUntil } from "rxjs/operators";
 export class AnimeComponent extends BaseComponent implements OnInit, OnDestroy {
   id: number;
   animeDetails: IData;
-  noneFoundMsg: string;
+  noneFoundMsg = `None found`;
   producers: string = "";
   licensors: string = "";
-  noGenreMsg: string;
+  noGenreMsg = `No genres have been added yet`;
   genres: string = "";
   studios: string = "";
   notifier = new Subject();
+  backgroundErrorMsg = `No background information has been added to this title.`;
+  informationErrorMsg = `No information available.`;
 
   constructor(
     private _route: ActivatedRoute,
     private _animeService: JikanService
   ) {
     super();
-    this.noneFoundMsg = "None found";
-    this.noGenreMsg = "No genres have been added yet.";
   }  
 
   ngOnInit(): void {
