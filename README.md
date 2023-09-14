@@ -60,3 +60,9 @@ This application is an anime search engine called "Anime Hub". It uses a free AP
 - Display paginated list of animes by alphabet or by name.
 - List can be sorted by *title*, *type*, *episodes* or *score*.
 - Display dedicated anime description page for complete details about any anime.
+
+## Changelog
+
+- September 5, 2023
+  - Jikan API upgrade from [v3](https://docs.google.com/document/d/172RQ9wWiXqOnGqjXrV3cxMNceiqwCjxjprSFuyLwQJM/edit?usp=sharing) to [v4](https://docs.api.jikan.moe/)
+
