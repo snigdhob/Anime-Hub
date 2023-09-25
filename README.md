@@ -21,7 +21,7 @@ git clone https://github.com/snigdhob/Anime-Hub.git
 cd Anime-Hub
 ```
 
-###Install npm packages
+### Install npm packages
 
 Install the `npm packages` described in the `package.json` file:
 
